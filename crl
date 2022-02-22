@@ -1,0 +1,63 @@
+package main
+
+import (
+  "fmt"
+)
+type gaji struct{
+  tunjangan float32
+  pajak     float32
+  result    float32
+}
+
+func main() {
+  var tunjangan        float32
+  var operator         string
+  var pajak            float32
+  var nama_karyawan    string
+  var operand          float32
+  var result           float32
+  var tanya            string
+  
+  tanya = "y"
+  nama_karyawan = "Muhammed Hussein"
+  
+  fmt.Println("  Selamat Datang Di Program Gaji Pokok Karyawan  ")
+  fmt.Println("—————————————————————————————————————————————————")
+  fmt.Println("                                                   ")
+  
+  for tanya != "n" {
+    fmt.Println("Apakah Anda Ingin Melakukan Operasi Perhitungan? ( y / n ): ")
+    fmt.Scanln(&tanya)
+    
+    if tanya == "y" {
+      fmt.Println("========================================================")
+      fmt.Print("Masukan tunjangan: ")
+      fmt.Scanln(&tunjangan)
+      fmt.Print("Masukan Operator: ")
+      fmt.Scanln(&operator)
+      fmt.Print("Masukan pajak: ")
+      fmt.Scanln(&pajak)
+      
+      if operator == "-"{
+        operand = tunjangan-pajak
+      }
+      
+      for result > tunjangan {
+        operand = tunjangan-pajak
+        result++
+          
+      }
+      fmt.Print("Hasil Perhitungan ", tunjangan-pajak)
+     
+      fmt.Print(tunjangan)
+      fmt.Print(pajak)
+      fmt.Print(" = ")
+      fmt.Println(operand)
+      fmt.Println("Nama Karyawannya Adalah: ", nama_karyawan)
+      fmt.Println("————————————————————————————————————————————————————")
+    }
+  }
+  fmt.Println("—————————————")
+  fmt.Println("Terima Kasih")
+  fmt.Print("—————————————")
+}
