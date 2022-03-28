@@ -1,0 +1,93 @@
+package main
+
+import "fmt"
+
+type node struct {
+  prev *node
+  next *node
+  key interface{}
+}
+
+type List struct {
+  head *node 
+  tail *node
+}
+
+func (L *List) Insert(key interface{}) {
+  list := &node {
+    next: L.head,
+    key: key,
+  }
+  if L.head != nil {
+    L.head.prev = list
+  }
+  L.head = list 
+  
+  l := L.head
+  for l.next != nil {
+    l = l.next
+  }
+  L.tail = l
+}
+
+func (l *List) display() {
+  list := l.head
+  for list != nil {
+    fmt.Printf("%v —>", list.key)
+    list = list.next
+  }
+  fmt.Print()
+}
+
+func display(list *node) {
+  for list != nil {
+    fmt.Printf("%v —>", list.key)
+    list = list.next
+  }
+  fmt.Print()
+}
+
+func showBackWards(list *node) {
+  for list != nil {
+    fmt.Printf("%v <—", list.key)
+    list = list.prev
+  }
+  fmt.Print()
+}
+
+func (l *List) reverse() {
+ curr := l.head
+ var prev *node
+ l.tail = l.head
+ 
+ for curr != nil {
+   curr := curr.next
+   curr.next = prev
+   prev = curr
+   curr = prev
+ }
+ l.head = prev
+ display(l.head)
+}
+
+func main() {
+  fmt.Println("Program Linked List")
+  
+  link := List{}
+  link.Insert(3)
+  link.Insert(8)
+  link.Insert(14)
+  link.Insert(20)
+  link.Insert(26)
+  link.Insert(30)
+  
+  fmt.Println("\n\n————————————————————————————————\n\n")
+  fmt.Println("head: ", link.head.key)
+  fmt.Println("tail: ", link.tail.key)
+  link.display()
+  fmt.Println("\n\n————————————————————————————————\n\n")
+  fmt.Println("head: ", link.head.key)
+  fmt.Println("tail: ", link.tail.key)
+  link.reverse()
+  fmt.Println("\n\n=================================\n\n")
+}
