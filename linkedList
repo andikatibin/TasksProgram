@@ -1,0 +1,100 @@
+package main
+
+import "fmt"
+
+var pl = fmt.Println
+var f = fmt.Printf
+
+type node struct {
+  p *node
+  n *node
+  key  interface{}
+}
+
+type list struct {
+  h *node
+  t *node
+}
+
+func (L *list) i(key interface{}) {
+  list := &node{
+    n: L.h,
+    key:  key,
+  }
+  if L.h != nil {
+    L.h.p = list
+  }
+  L.h = list
+
+  l := L.h
+  for l.n != nil {
+    l = l.n
+  }
+  L.t = l
+}
+
+func (L *list) display() {
+  list := L.h
+  for list != nil {
+    f("%d —>", list.key)
+    list = list.n
+  }
+  pl()
+}
+
+func display(list *node) {
+  for list != nil {
+    f("%d —>", list.key)
+    list = list.n
+  }
+  pl()
+}
+
+func ShowBackWards(list *node) {
+  for list != nil {
+    f("%d <—", list.key)
+    list = list.p
+  }
+  pl()
+}
+
+func (L *list) reverse() {
+  c := L.h
+  var p *node
+  L.t = L.h
+
+  for c != nil {
+    n := c.n
+    c.n = p
+    p = c
+    c = n
+  }
+  L.h = p
+  display(L.h)
+}
+
+func main() {
+  pl("  Program LinkedList by Go-Lang  ")
+  pl("—————————————————————————————————")
+  
+  link := list{}
+  link.i(1)
+  link.i(10)
+  link.i(15)
+  link.i(20)
+  link.i(30)
+  link.i(50)
+  
+  pl("—————————————————————————————————")
+  f("Head: %v\n", link.h.key)
+  f("Tail: %v\n", link.t.key)
+  pl("                                         ")
+  link.display()
+  pl("\n\n—————————————————————————————————\n\n")
+  f("head: %v\n", link.h.key)
+  f("tail: %v\n", link.t.key)
+  pl("                                         ")
+  link.reverse()
+  pl("\n\n—————————————————————————————————\n\n")
+}
+
